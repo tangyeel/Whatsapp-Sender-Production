@@ -1,0 +1,24 @@
+name: Supabase Keep Alive
+
+on:
+  schedule:
+    # Runs every 3 days at midnight UTC to prevent the 7-day pause
+    - cron: '0 0 */3 * *'
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  ping-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch from Supabase REST API
+        run: |
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X GET "https://ohiuxpdxprypteiqvayk.supabase.co/rest/v1/profiles?select=id&limit=1" \
+          -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9oaXV4cGR4cHJ5cHRlaXF2YXlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4NDM0NjQsImV4cCI6MjA5NTQxOTQ2NH0.mlb9dzU5T_IAzBe5PBnaIVihY3rT-Bgf5xxdD3WbOu4" \
+          -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9oaXV4cGR4cHJ5cHRlaXF2YXlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4NDM0NjQsImV4cCI6MjA5NTQxOTQ2NH0.mlb9dzU5T_IAzBe5PBnaIVihY3rT-Bgf5xxdD3WbOu4")
+          
+          if [ "$HTTP_STATUS" -eq 200 ]; then
+            echo "Successfully pinged Supabase!"
+          else
+            echo "Failed to ping Supabase. HTTP Status: $HTTP_STATUS"
+            exit 1
+          fi
