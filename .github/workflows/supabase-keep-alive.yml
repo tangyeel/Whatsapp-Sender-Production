@@ -12,9 +12,7 @@ jobs:
     steps:
       - name: Fetch from Supabase REST API
         run: |
-          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X GET "https://ohiuxpdxprypteiqvayk.supabase.co/rest/v1/profiles?select=id&limit=1" \
-          -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9oaXV4cGR4cHJ5cHRlaXF2YXlrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTg0MzQ2NCwiZXhwIjoyMDk1NDE5NDY0fQ.XDZWqev0Fn1C3dfEePSaMmqTwhO1jypOaOLV4GdevmI" \
-          -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9oaXV4cGR4cHJ5cHRlaXF2YXlrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTg0MzQ2NCwiZXhwIjoyMDk1NDE5NDY0fQ.XDZWqev0Fn1C3dfEePSaMmqTwhO1jypOaOLV4GdevmI")
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X GET "https://ohiuxpdxprypteiqvayk.supabase.co/rest/v1/profiles?select=id&limit=1" -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9oaXV4cGR4cHJ5cHRlaXF2YXlrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTg0MzQ2NCwiZXhwIjoyMDk1NDE5NDY0fQ.XDZWqev0Fn1C3dfEePSaMmqTwhO1jypOaOLV4GdevmI" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9oaXV4cGR4cHJ5cHRlaXF2YXlrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTg0MzQ2NCwiZXhwIjoyMDk1NDE5NDY0fQ.XDZWqev0Fn1C3dfEePSaMmqTwhO1jypOaOLV4GdevmI")
           
           if [ "$HTTP_STATUS" -eq 200 ]; then
             echo "Successfully pinged Supabase!"
